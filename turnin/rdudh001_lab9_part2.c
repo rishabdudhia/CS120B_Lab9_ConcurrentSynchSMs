@@ -6,6 +6,8 @@
  *	One LED at a time: B0, B1, B2, repeat (300ms); Blink B3 on and off (1000ms); combine in last sm
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
+ *
+ *	Youtube Link: https://www.youtube.com/watch?v=_N0DPnKyGzQ
  */
 #include <avr/io.h>
 #include <avr/interrupt.h>
