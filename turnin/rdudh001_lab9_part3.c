@@ -118,18 +118,62 @@ void BlinkingLEDSM () {
 	}
 }
 
-static unsigned char sound;
+unsigned char sound = 0x00;
+enum S_States {smstart3, wait, on1, on2, off1, off2} s_state;
 
 void SoundSM() {
-	static unsigned char input = ~PINA & 0x04;
-	if (input == 0x00){
-		sound = 0x00;
-		return;
+	unsigned char input = ~PINA & 0x04;//FIXME negation
+	
+	switch (s_state) {
+		case smstart3:
+			s_state = wait;
+			sound = 0x00;
+			break;
+		case wait:
+			if (input == 0x00)
+				s_state = wait;
+			else
+				s_state = on1;
+			break;
+		case on1:
+			if (input == 0x00)
+                                s_state = wait;
+                        else
+                                s_state = on2;
+                        break;
+		case on2:
+			if (input == 0x00)
+                                s_state = wait;
+                        else
+                                s_state = off1;
+                        break;
+		case off1:
+			if (input == 0x00)
+                                s_state = wait;
+                        else
+                                s_state = off2;
+                        break;
+		case off2:
+			if (input == 0x00)
+                                s_state = wait;
+                        else
+                                s_state = on1;
+                        break;
 	}
-	if (sound == 0x04)
-		sound = 0x00;
-	else
-		sound = 0x04;
+
+	switch (s_state) {
+		case smstart3:
+			break;
+		case wait:
+		case off1:
+		case off2:
+			sound = 0x00;
+			break;
+		case on1:
+		case on2:
+			sound = 0x10;
+			break;
+	}
 }
 
 
@@ -140,13 +184,16 @@ void CombineLEDsSM() {
 
 int main(void) {
     /* Insert DDR and PORT initializations */
+    DDRA = 0x00; PORTA = 0xFF;
     DDRB = 0xFF; PORTB = 0x00;
     tl_state = smstart1;
     bl_state = smstart2;
+    s_state = smstart3;
+    sound = 0x00;
     static unsigned long tl_elapsed = 300;
     static unsigned long bl_elapsed = 1000;
     static unsigned long s_elapsed = 2;
-    static unsigned long ct_elapsed = 100;
+    //static unsigned long ct_elapsed = 1;
     TimerSet(1);
     TimerOn();
     /* Insert your solution below */
@@ -163,16 +210,16 @@ int main(void) {
 		SoundSM();
 		s_elapsed = 0;
 	}
-	if (ct_elapsed >= 100) {
+	//if (ct_elapsed >= 1) {
 		CombineLEDsSM();
-		ct_elapsed = 0;
-	}
+		//ct_elapsed = 0;
+	//}
 	while (!TimerFlag) {}
 	TimerFlag = 0;
 	tl_elapsed += 1;
 	bl_elapsed += 1;
 	s_elapsed += 1;
-	ct_elapsed += 1;
+	//ct_elapsed += 1;
     }
     return 1;
 }

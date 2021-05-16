@@ -16,34 +16,34 @@
 # altered in between executions (unless preconditions are used).
 tests = [ 
     {'description': 'This test will run first.',
-    'steps': [ {'iterations': 1 } ],
+        'steps': [ {'inputs': [('PINA', 0x00)], 'iterations': 1 } ],
     'expected': [('PORTB',0x09)],
     },
-    {'description': 'This test will run first.',
-    'steps': [ {'iterations': 302 } ],
-    'expected': [('PORTB',0x0A)],
-    },
-    {'description': 'This test will run first.',
-    'steps': [ {'iterations': 302 } ],
-    'expected': [('PORTB',0x0C)],
-    },
-    {'description': 'This test will run first.',
-    'steps': [ {'iterations': 100 } ],
-    'expected': [('PORTB',0x0C)],
-    },
-    {'description': 'This test will run first.',
-    'steps': [ {'iterations': 202 } ],
-    'expected': [('PORTB',0x09)],
-    },
-    {'description': 'This test will run first.',
-    'steps': [ {'iterations': 100 } ],
-    'expected': [('PORTB',0x01)],
-    },
+#    {'description': 'This test will run first.',
+#    'steps': [ {'iterations': 302 } ],
+#    'expected': [('PORTB',0x0A)],
+#    },
+#    {'description': 'This test will run first.',
+#    'steps': [ {'iterations': 302 } ],
+#    'expected': [('PORTB',0x0C)],
+#    },
+#    {'description': 'This test will run first.',
+#    'steps': [ {'iterations': 100 } ],
+#    'expected': [('PORTB',0x0C)],
+#    },
+#    {'description': 'This test will run first.',
+#    'steps': [ {'iterations': 202 } ],
+#    'expected': [('PORTB',0x09)],
+#    },
+#    {'description': 'This test will run first.',
+#    'steps': [ {'iterations': 100 } ],
+#    'expected': [('PORTB',0x01)],
+#    },
 
     ]
 
 # Optionally you can add a set of "watch" variables these need to be global or static and may need
 # to be scoped at the function level (for static variables) if there are naming conflicts. The 
 # variables listed here will display everytime you hit (and stop at) a breakpoint
-watch = ['tl_state', 'bl_state','threeLEDs', 'blinkingLED', ' main()::ct_elapsed']
+watch = ['tl_state', 'bl_state', 's_state','threeLEDs', 'blinkingLED', 'sound']
 
