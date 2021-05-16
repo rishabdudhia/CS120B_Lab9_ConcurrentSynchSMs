@@ -1,9 +1,12 @@
 /*	Author: Rishab Dudhia (rdudh001)
  *  Partner(s) Name: 
  *	Lab Section: 022
- *	Assignment: Lab #9  Exercise #3
+ *	Assignment: Lab #9  Exercise #4
  *	Exercise Description: [optional - include for your own benefit]
- *	One LED at a time: B0, B1, B2, repeat (300ms); Blink B3 on and off (1000ms); when A2 button pressed speaker connected to B4 plays on for 2ms then off for 2ms; combine in last sm
+ *	One LED at a time: B0, B1, B2, repeat (300ms); Blink B3 on and off (1000ms); 
+ *	when A2 button pressed speaker connected to B4 plays on for 2ms then off for 2ms;
+ *	buttons on A0 and A1 inc and dec frequency on speaker; combine in last sm
+ *
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
  *
